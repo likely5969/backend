@@ -1,0 +1,15 @@
+1739431961279|10|statement|connection 0|url jdbc:p6spy:mysql://34.47.64.102:3306/admin?serverTimezone=Asia/Seoul&characterEncoding=UTF-8|select * from `admin`.`member` where 1=0|select * from `admin`.`member` where 1=0
+1739431961301|10|statement|connection 0|url jdbc:p6spy:mysql://34.47.64.102:3306/admin?serverTimezone=Asia/Seoul&characterEncoding=UTF-8|select * from `admin`.`role` where 1=0|select * from `admin`.`role` where 1=0
+1739431968112|8|statement|connection 0|url jdbc:p6spy:mysql://34.47.64.102:3306/admin?serverTimezone=Asia/Seoul&characterEncoding=UTF-8|select * from `admin`.`member` where 1=0|select * from `admin`.`member` where 1=0
+1739431968129|8|statement|connection 0|url jdbc:p6spy:mysql://34.47.64.102:3306/admin?serverTimezone=Asia/Seoul&characterEncoding=UTF-8|select * from `admin`.`role` where 1=0|select * from `admin`.`role` where 1=0
+1739431983799|7|statement|connection 10|url jdbc:p6spy:mysql://34.47.64.102:3306/admin?serverTimezone=Asia/Seoul&characterEncoding=UTF-8|select * from `admin`.`member` where 1=0|select * from `admin`.`member` where 1=0
+1739431983816|7|statement|connection 10|url jdbc:p6spy:mysql://34.47.64.102:3306/admin?serverTimezone=Asia/Seoul&characterEncoding=UTF-8|select * from `admin`.`role` where 1=0|select * from `admin`.`role` where 1=0
+1739431987004|8|statement|connection 20|url jdbc:p6spy:mysql://34.47.64.102:3306/admin?serverTimezone=Asia/Seoul&characterEncoding=UTF-8|select * from `admin`.`member` where 1=0|select * from `admin`.`member` where 1=0
+1739431987025|9|statement|connection 20|url jdbc:p6spy:mysql://34.47.64.102:3306/admin?serverTimezone=Asia/Seoul&characterEncoding=UTF-8|select * from `admin`.`role` where 1=0|select * from `admin`.`role` where 1=0
+1739432371681|8|statement|connection 1|url jdbc:mysql://34.47.64.102:3306/admin?serverTimezone=Asia/Seoul&characterEncoding=UTF-8|select * from `admin`.`member` where 1=0|select * from `admin`.`member` where 1=0
+1739432371697|7|statement|connection 1|url jdbc:mysql://34.47.64.102:3306/admin?serverTimezone=Asia/Seoul&characterEncoding=UTF-8|select * from `admin`.`role` where 1=0|select * from `admin`.`role` where 1=0
+1739432394200|8|statement|connection 3|url jdbc:mysql://34.47.64.102:3306/admin?serverTimezone=Asia/Seoul&characterEncoding=UTF-8|select * from `admin`.`member` where 1=0|select * from `admin`.`member` where 1=0
+1739432394219|9|statement|connection 3|url jdbc:mysql://34.47.64.102:3306/admin?serverTimezone=Asia/Seoul&characterEncoding=UTF-8|select * from `admin`.`role` where 1=0|select * from `admin`.`role` where 1=0
+1739432771621|6|statement|connection 5|url jdbc:mysql://34.47.64.102:3306/admin?serverTimezone=Asia/Seoul&characterEncoding=UTF-8|select * from `admin`.`member` where 1=0|select * from `admin`.`member` where 1=0
+1739432771637|7|statement|connection 5|url jdbc:mysql://34.47.64.102:3306/admin?serverTimezone=Asia/Seoul&characterEncoding=UTF-8|select * from `admin`.`role` where 1=0|select * from `admin`.`role` where 1=0
+1739704920102|6|rollback|connection 4|url jdbc:mysql://34.47.64.102:3306/admin?serverTimezone=Asia/Seoul&characterEncoding=UTF-8||
