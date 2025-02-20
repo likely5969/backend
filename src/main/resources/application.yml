@@ -19,7 +19,7 @@ spring:
         format_sql: true
         show_sql: true
     hibernate:
-      ddl-auto: create # 개발 시 `update`, 운영 시 `validate` 또는 `none` 추천
+      ddl-auto: update # 개발 시 `update`, 운영 시 `validate` 또는 `none` 추천
   
   sql:
     init:

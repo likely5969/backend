@@ -44,18 +44,13 @@ public class LoginService {
 		if (!encoder.matches(login.getPassword(), member.getPassword())) {
 			throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
 		}
-
-		QMember qmember = QMember.member;
-		Member result = jpaQuertyFactory.selectFrom(qmember)
-						.where(login.getUserId() !=null ? qmember.memberId.eq(login.getUserId()) : null).fetchOne();
-		// 암호화된 password를 디코딩한 값과 입력한 패스워드 값이 다르면 null 반환
 		HashMap<String, Object> retCheck = new HashMap<>();
-		if(!result.getMemberId().isBlank()) {
+		if(!member.getMemberId().isBlank()) {
 			String accessToken = jwtUtils.createAccessToken(member);
 			String refreshToken = jwtUtils.createRefreshToken(refreshTokenTime);
 	        retCheck.put("accessToken", accessToken);
 	        retCheck.put("refreshToken", refreshToken);
-	        retCheck.put("member", member);
+	        retCheck.put("memberId", member.getMemberId());
 		}
 		return retCheck;
 	}

@@ -1,6 +1,7 @@
 package com.backend.com.interceptor;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.backend.com.dto.response.MemberPermDto;
@@ -20,6 +21,8 @@ public class ProjectInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request , HttpServletResponse resposne,Object object) {
 		String uri =request.getRequestURI();
+		uri =request.getParameter("pageUrl");
+		
  		MemberPermDto memberPermDto = commonService.selectMemberPermission(uri);
 		request.setAttribute("MemberPermDto", memberPermDto);
 		return true;

@@ -58,7 +58,6 @@ public class SecurityConfig {
     	http.authorizeHttpRequests(
     			authorize -> authorize.requestMatchers(AUTH_WHITELIST).permitAll()
     			.requestMatchers("/api/v2/login/loginAction").anonymous()
-    			.requestMatchers("/api/v2/auth/menuAuth").hasAnyRole("ADMIN", "USER")
      	        .anyRequest().authenticated()
     	);
        	

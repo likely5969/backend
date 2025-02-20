@@ -25,18 +25,11 @@ import lombok.extern.slf4j.Slf4j;
 public class LoginController {
 
 	private final LoginService loginService;
-	private final TokenService tokenService;
 
 	@PostMapping(value = "/loginAction")
 	public DataResponseDto<Object> loginAction(@RequestBody LoginDto login,HttpServletResponse response) {
 		HashMap<String,Object> tokenMap = loginService.loginAction(login);
-		if(tokenMap!=null) {
-			tokenService.setttingTokens(response,login,tokenMap);
-			return DataResponseDto.of(tokenMap);
-			
-		}else {
-			return DataResponseDto.of(tokenMap);
-		}
+		return DataResponseDto.of(tokenMap);
 	}  
 	  
 } 

@@ -38,9 +38,9 @@ public class Role {
 	private Set<MemberRole> memberRoles;
 
 	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<RoleMenuPermission> roelMenuPerms;
+	private List<RoleMenuPermission> roleMenuPerms;
 	
 	@OneToMany(mappedBy="role",cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<RoleMenuApi> menuApis;
+	private List<RoleMenuApi> roleMenuApis;
 	
 }
