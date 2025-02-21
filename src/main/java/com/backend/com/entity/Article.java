@@ -2,6 +2,8 @@ package com.backend.com.entity;
 
 import java.time.LocalDateTime;
 
+import com.backend.com.dto.response.ArticleDto;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Version;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -52,4 +53,9 @@ import lombok.Setter;
 	@JoinColumn(name = "BOARD_ID", nullable = false)
 	private Board board;
 
+	
+	// DTO 변환 메서드
+    public ArticleDto toDto() {
+        return new ArticleDto(this);
+    }
 }

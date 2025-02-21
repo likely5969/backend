@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.backend.com.dto.request.BoardPageDto;
+import com.backend.com.dto.response.ArticleDto;
 import com.backend.com.entity.Article;
 import com.backend.com.entity.Board;
 import com.backend.com.entity.QBoard;
@@ -34,11 +35,6 @@ public class BoardService {
 			log.info("article",article.getTitle());
  			Long boardId = 13L;
 			Board board = boardRepository.findById(boardId).orElseGet(() -> createDefaultBoard());
- 
-		
-			
-			
-			
  			Article paramArticle = Article.builder()
 										.title(article.getTitle())
 										.content(article.getContent())
@@ -77,16 +73,11 @@ public class BoardService {
 //        return boardRepository.save(defaultBoard);
         return defaultBoard;
     }
-	public Board selectList(BoardPageDto boardPageDto) {
-		
+	public List<ArticleDto> selectList(BoardPageDto boardPageDto) {
 		Board board = boardRepository.findById(boardPageDto.getBoardId()).get();
-		List<Article> articles =board.getArticleList();
-		articles.stream().filter(article -> article.getId() > 0 && article.getId() < 10)
-						 .collect(Collectors.toList());
-		board.setArticleList(articles);
-		
-		
-		return board;
+		List<ArticleDto> articles=board.getArticleList().stream().filter(article -> article.getId() > 0 && article.getId() < 10)
+		.map(Article::toDto).collect(Collectors.toList());
+		return articles;
 	}
 
 }
