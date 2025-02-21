@@ -22,7 +22,7 @@ public class ArticleDto {
 	private LocalDateTime updatedAt;
 	private Long boardId;
 	// 생성자에서 Article 객체를 받아서 DTO로 변환
-	public ArticleDto(Article article) {
+	public ArticleDto(Article article) {  
 		this.id = article.getId();
 		this.title = article.getTitle();
 		this.content = article.getContent();

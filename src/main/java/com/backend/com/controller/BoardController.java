@@ -32,10 +32,11 @@ public class BoardController {
 
 	private final BoardService boardService;
 	
-	@PostMapping(value = "/writeProc")
-	public DataResponseDto<Object> writeProc(@RequestBody Article article,HttpServletResponse response) {
- 		boardService.saveArticle(article);
-		return DataResponseDto.of("");
+	@PostMapping(value = "/writeAction")
+	public DataResponseDto<Object> writeProc(@RequestBody ArticleDto articleDto,HttpServletResponse response) {
+ 		Long result = boardService.saveArticle(articleDto);
+		
+ 		return DataResponseDto.of(result);
  	}
 	
 	@GetMapping(value="/list/{boardId}/{pageNo}")

@@ -3,6 +3,7 @@ package com.backend.com.entity;
 import java.time.LocalDateTime;
 
 import com.backend.com.dto.response.ArticleDto;
+import com.backend.com.entity.common.CommonEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,8 +25,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
- public class Article {
+@NoArgsConstructor 
+ public class Article{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ARTICLE_ID", columnDefinition = "BIGINT COMMENT '게시글ID'")
@@ -41,14 +42,15 @@ import lombok.Setter;
 	private String regId;
 
 	@Column(name = "CREATED_AT", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	private LocalDateTime createdAt;
+	private LocalDateTime createdAt = LocalDateTime.now();
 
 	@Column(name = "UPD_ID", nullable = false, columnDefinition = "VARCHAR(100) comment '등록자'")
 	private String updId;
 
 	@Column(name = "UPDATED_AT", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	private LocalDateTime updatedAt;
+	private LocalDateTime updatedAt = LocalDateTime.now();
 
+	
 	@ManyToOne
 	@JoinColumn(name = "BOARD_ID", nullable = false)
 	private Board board;

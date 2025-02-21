@@ -40,22 +40,30 @@ public class CommonService {
 		if(roles == null || roles.isEmpty()) throw new GeneralException("권한없음");
 		
 		List<RoleDto> roleDts =roles.stream().map(role -> new RoleDto(role.getRoleName(),role.getRolePriorty())).collect(Collectors.toList());
+		
+		
 		List<RoleMenuPermission> roleMenuPerms =member.getMemberRoleList().stream().flatMap(
 				memberRole -> memberRole.getRole().getRoleMenuPerms().stream()
 		).collect(Collectors.toList());
 		
-		List<Map<String, Object>> myMenuPerRole  =roleMenuPerms.stream().filter(roleMenuPerm -> roleMenuPerm.getMenuPermission().getMenu().getMenuUrl().equals(uri))
-		.map(roleMenuPerm -> {
-			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("roleName", roleMenuPerm.getRole().getRoleName());
-			map.put("rolePriorty", roleMenuPerm.getRole().getRolePriorty());
-			map.put("memberPermVal", roleMenuPerm.getMenuPermission().getMenuPermVal());
-			
-			List<String> menuApis = roleMenuPerm.getRole().getRoleMenuApis().stream()
-					     .map(roleMenuApi -> roleMenuApi.getMenuApi().getApi().getApiUrl()).collect(Collectors.toList());
-			map.put("menuApis",menuApis);
-			return map;
-		}).collect(Collectors.toList());
+		
+		
+		
+		
+		List<Map<String, Object>> myMenuPerRole  =roleMenuPerms.stream().filter(
+				roleMenuPerm -> roleMenuPerm.getMenuPermission().getMenu().getMenuUrl().equals(uri))
+				.map(roleMenuPerm -> {
+					log.info( roleMenuPerm.getMenuPermission().getMenu().getMenuUrl());
+					Map<String,Object> map = new HashMap<String,Object>();
+					map.put("roleName", roleMenuPerm.getRole().getRoleName());
+					map.put("rolePriorty", roleMenuPerm.getRole().getRolePriorty());
+					map.put("memberPermVal", roleMenuPerm.getMenuPermission().getMenuPermVal());
+					map.put("menuUrl", roleMenuPerm.getMenuPermission().getMenu().getMenuUrl());
+					List<String> menuApis = roleMenuPerm.getRole().getRoleMenuApis().stream()
+							     .map(roleMenuApi -> roleMenuApi.getMenuApi().getApi().getApiUrl()).collect(Collectors.toList());
+					map.put("menuApis",menuApis);
+					return map;
+				}).collect(Collectors.toList());
 		return  MemberPermDto.builder().memberId(memberId).roles(roleDts).myMenuPerRoles(myMenuPerRole).build();
 	}
 }
