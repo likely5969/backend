@@ -8,11 +8,13 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.backend.com.dto.request.BoardPageDto;
 import com.backend.com.dto.response.ArticleDto;
 import com.backend.com.entity.Article;
 import com.backend.com.entity.Board;
+import com.backend.com.entity.QArticle;
 import com.backend.com.entity.QBoard;
 import com.backend.com.repository.ArticleRepository;
 import com.backend.com.repository.BoardRepository;
@@ -28,7 +30,9 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardService {
 	private final BoardRepository boardRepository;
 	private final ArticleRepository articleRepository;
-
+    private final JPAQueryFactory queryFactory;
+	
+	
     @Transactional(rollbackFor = Exception.class)  // 체크 예외도 롤백
      public Long saveArticle(ArticleDto articleDto) {
 		try {
@@ -39,6 +43,7 @@ public class BoardService {
 			
 			Board board = boardRepository.findById(articleDto.getBoardId()).get();
 	        Article article = Article.builder()
+	        						 .id(articleDto.getId())
 	        						 .title(articleDto.getTitle())
 	        						 .content(articleDto.getContent())
 	        						 .board(board).regId(userId).updId(userId).build();
@@ -50,12 +55,26 @@ public class BoardService {
 		}
 		
 	}
- 
-	public List<ArticleDto> selectList(BoardPageDto boardPageDto) {
-		Board board = boardRepository.findById(boardPageDto.getBoardId()).get();
+    @Transactional
+	public List<ArticleDto> selectArticles( Long boardId) {
+		Board board = boardRepository.findById(boardId).get();
 		List<ArticleDto> articles=board.getArticleList().stream()
-		.map(Article::toDto).collect(Collectors.toList());
+		.map(article -> article.toDto()).collect(Collectors.toList());
 		return articles;
 	}
+
+	public ArticleDto selectArticle(Long boardId,Long articleId) {
+		QArticle article =QArticle.article;
+		Article articleOne = queryFactory.selectFrom(article)
+					.where(article.board.id.eq(boardId)
+					.and(article.id.eq(articleId)))
+					.fetchOne();
+		ArticleDto result =articleOne.toDto();
+		return result;
+	}
+
+	public Long deleteArticle(Long boardId, Long articleId) {
+		return articleRepository.deleteByBoardIdAndId(boardId,articleId);
+	} 
 
 }

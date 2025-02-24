@@ -19,6 +19,7 @@ public class WebConfig implements WebMvcConfigurer{
 	        // 특정 URL 패턴에 대해 인터셉터를 등록
 	        registry.addInterceptor(projectInterceptor)
 	                .addPathPatterns("/api/v2/**/**") // URL 패턴 지정
+	                .addPathPatterns("/api/v2/**/**/**/**") 
 	        		.excludePathPatterns("/api/v2/login/loginAction");
 	    }  
 }

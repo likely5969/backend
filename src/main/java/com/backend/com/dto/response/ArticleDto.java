@@ -30,6 +30,6 @@ public class ArticleDto {
 		this.createdAt = article.getCreatedAt();
 		this.updId = article.getUpdId();
 		this.updatedAt = article.getUpdatedAt();
-		this.boardId = article.getBoard().getId();
+		this.boardId = (article.getBoard() != null)? article.getBoard().getId(): null;
 	}
 }

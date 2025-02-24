@@ -9,16 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.backend.com.dto.request.BoardPageDto;
 import com.backend.com.dto.response.ArticleDto;
-import com.backend.com.entity.Article;
-import com.backend.com.entity.Board;
-import com.backend.com.entity.Member;
 import com.backend.com.response.common.DataResponseDto;
 import com.backend.com.service.BoardService;
-import com.backend.com.service.CommonService;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,22 +26,33 @@ public class BoardController {
 
 	private final BoardService boardService;
 	
-	@PostMapping(value = "/writeAction")
-	public DataResponseDto<Object> writeProc(@RequestBody ArticleDto articleDto,HttpServletResponse response) {
- 		Long result = boardService.saveArticle(articleDto);
-		
- 		return DataResponseDto.of(result);
- 	}
+	
 	
 	@GetMapping(value="/list/{boardId}/{pageNo}")
-	public DataResponseDto<Object> list(@PathVariable("pageNo") Long pageNo,@PathVariable("boardId") Long boardId,HttpServletResponse response) {
-		BoardPageDto param =new BoardPageDto();
-		param.setBoardId(boardId);
-		param.setPageNo(pageNo);
-		 List<ArticleDto> articles = boardService.selectList(param);
+	public DataResponseDto<Object> articles(@PathVariable("boardId") Long boardId , @PathVariable("pageNo") Long pageNo ) {
+		List<ArticleDto> articles = boardService.selectArticles(boardId);
 		return DataResponseDto.of(articles);
 
 	}
-	  
+	@GetMapping(value="/view/{boardId}/{articleId}")
+	public DataResponseDto<Object> article(@PathVariable("boardId") Long boardId , @PathVariable("articleId") Long articleId,HttpServletResponse response) {
+		ArticleDto article = boardService.selectArticle(boardId,articleId);
+		return DataResponseDto.of(article);
+
+	}
+	@PostMapping(value = "/writeAction")
+	public DataResponseDto<Object> writeProc(@RequestBody ArticleDto articleDto,HttpServletResponse response) {
+ 		Long result = boardService.saveArticle(articleDto);
+ 		return DataResponseDto.of(result);
+ 	}
+	@PostMapping(value="/delete/{boardId}/{articleId}")
+	public DataResponseDto<Object> deleteArticle(@PathVariable ("boardId")Long boardId, @PathVariable("articleId") Long articleId){
+		log.info("boardId:::::::"+boardId);
+		log.info("articleId:::::::"+articleId);
+		Long result = boardService.deleteArticle(boardId,articleId);
+ 		return DataResponseDto.of(result);
+
+	}
+	
 } 
  

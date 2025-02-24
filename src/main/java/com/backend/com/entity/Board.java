@@ -64,7 +64,5 @@ public class Board {
 	
 	@Column(name = "UPDATED_AT", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private LocalDateTime updatedAt;
-//	
-//	@Version  
-//	private Long version =0L;
+ 
 }

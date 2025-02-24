@@ -42,12 +42,14 @@ import lombok.Setter;
 	private String regId;
 
 	@Column(name = "CREATED_AT", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Builder.Default
 	private LocalDateTime createdAt = LocalDateTime.now();
 
 	@Column(name = "UPD_ID", nullable = false, columnDefinition = "VARCHAR(100) comment '등록자'")
 	private String updId;
 
 	@Column(name = "UPDATED_AT", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Builder.Default
 	private LocalDateTime updatedAt = LocalDateTime.now();
 
 	

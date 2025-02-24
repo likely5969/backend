@@ -6,5 +6,6 @@ import lombok.Data;
 public class BoardPageDto {
   private Long BoardId;
   private Long pageNo;
+  private Long articleId;
   
 }
