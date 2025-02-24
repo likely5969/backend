@@ -2,6 +2,7 @@ package com.backend.com.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,7 +46,7 @@ public class BoardController {
  		Long result = boardService.saveArticle(articleDto);
  		return DataResponseDto.of(result);
  	}
-	@PostMapping(value="/delete/{boardId}/{articleId}")
+	@DeleteMapping(value="/delete/{boardId}/{articleId}")
 	public DataResponseDto<Object> deleteArticle(@PathVariable ("boardId")Long boardId, @PathVariable("articleId") Long articleId){
 		log.info("boardId:::::::"+boardId);
 		log.info("articleId:::::::"+articleId);

@@ -1,21 +1,15 @@
 package com.backend.com.service;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.backend.com.dto.request.BoardPageDto;
 import com.backend.com.dto.response.ArticleDto;
 import com.backend.com.entity.Article;
 import com.backend.com.entity.Board;
 import com.backend.com.entity.QArticle;
-import com.backend.com.entity.QBoard;
 import com.backend.com.repository.ArticleRepository;
 import com.backend.com.repository.BoardRepository;
 import com.backend.com.utils.SecurityUtil;
@@ -72,9 +66,9 @@ public class BoardService {
 		ArticleDto result =articleOne.toDto();
 		return result;
 	}
-
+	@Transactional
 	public Long deleteArticle(Long boardId, Long articleId) {
 		return articleRepository.deleteByBoardIdAndId(boardId,articleId);
 	} 
 
-}
+}   
