@@ -18,7 +18,7 @@ spring:
     database: mysql
     open-in-view: false
     hibernate:
-      ddl-auto: create # or update, create-drop, validate
+      ddl-auto: update # or update, create-drop, validate
     properties:
       hibernate:
         show_sql: true
