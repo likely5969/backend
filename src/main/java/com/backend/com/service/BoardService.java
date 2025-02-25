@@ -14,7 +14,7 @@ import com.backend.com.repository.ArticleRepository;
 import com.backend.com.repository.BoardRepository;
 import com.backend.com.utils.SecurityUtil;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-
+  
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

@@ -41,7 +41,7 @@ dependencies {
 
   // JPA
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.hibernate:hibernate-core:6.0.0.Final'
+    //implementation 'org.hibernate:hibernate-core:6.0.0.Final'
  	
 
 	// querydsl
@@ -74,7 +74,6 @@ dependencies {
 	// 테스트 관련
  	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.4'
- 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
   }
 
