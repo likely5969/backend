@@ -19,7 +19,7 @@ public class DataSourceConfig {
 	@Primary
     public DataSource dataSource() {
         HikariDataSource dataSource = new HikariDataSource();
-        dataSource.setJdbcUrl("jdbc:mysql://34.47.64.102:3306/admin?serverTimezone=Asia/Seoul&characterEncoding=UTF-8");
+        dataSource.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/admin?serverTimezone=Asia/Seoul&characterEncoding=UTF-8");
         dataSource.setUsername("root");
         dataSource.setPassword("123456");
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
