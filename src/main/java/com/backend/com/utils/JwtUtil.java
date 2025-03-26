@@ -4,11 +4,14 @@ package com.backend.com.utils;
 import java.security.Key;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.backend.com.entity.Member;
+import com.backend.com.enums.EnumStorage;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -100,19 +103,57 @@ public class JwtUtil {
      * @param token
      * @return IsValidate
      */
-    public boolean validateToken(String token) {
+    public HashMap<String,Object> validateToken(String token) {
+    	HashMap<String,Object> retCheck = new HashMap<String,Object>();
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
-            return true;
+            retCheck.put("retSign", "Y");
+            retCheck.put("retMsg", "정상");
+             
+            		
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
-            log.info("Invalid JWT Token", e);
+            retCheck.put("retSign", "N");
+            retCheck.put("retMsg", "Invalid JWT Token");
+            
+        
         } catch (ExpiredJwtException e) {
-            log.info("Expired JWT Token", e);
+            retCheck.put("retSign", "N");
+            retCheck.put("retMsg", "Expired JWT Token");
         } catch (UnsupportedJwtException e) {
-            log.info("Unsupported JWT Token", e);
+            retCheck.put("retSign", "N");
+            retCheck.put("retMsg", "Unsupported JWT Token");
+            
         } catch (IllegalArgumentException e) {
-            log.info("JWT claims string is empty.", e);
+            retCheck.put("retSign", "N");
+            retCheck.put("retMsg", "JWT claims string is empty.");
         }
-        return false;
+        return retCheck;
     }
+    
+    
+    public int  getRemainingExpiration(String token) {
+        try {
+            Claims claims = Jwts.parserBuilder()
+                                .setSigningKey(key)
+                                .build()
+                                .parseClaimsJws(token)
+                                .getBody();
+
+            Date expiration = claims.getExpiration();
+            long now = System.currentTimeMillis();
+            long remainingTime = expiration.getTime() - now;
+            if (remainingTime <= 0) {
+                return 0; // 만료됨
+            }
+            return (int) (remainingTime / 1000); // 남은 시간(초 단위)
+        } catch (ExpiredJwtException e) {
+            return 0; // 유효하지 않은 토큰
+        } catch (Exception e) {
+            log.error("토큰 검증 중 오류 발생", e);
+            return -1; // 유효하지 않은 토큰
+        }
+    }
+    
+    
+    
 }
